@@ -10,15 +10,19 @@ class CreateMobilesTable extends Migration
     {
         Schema::create('mobiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
+            $table->unsignedBigInteger('shop_id'); // Use unsignedBigInteger to match the shops' id type
             $table->string('brand');
             $table->string('model');
             $table->string('imei')->unique();
             $table->string('sku')->unique();
             $table->decimal('price', 10, 2);
             $table->enum('stock_status', ['in_stock', 'sold', 'reserved'])->default('in_stock');
-            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('set null');
+            $table->unsignedBigInteger('order_id')->nullable();
             $table->timestamps();
+
+            // Define the foreign key constraint linking shop_id to id in shops
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('set null');
         });
     }
 
