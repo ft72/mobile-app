@@ -9,7 +9,6 @@ class CreateShopsTable extends Migration
     public function up()
     {
         Schema::create('shops', function (Blueprint $table) {
-            $table->engine = 'InnoDB'; // Ensure InnoDB
             $table->id();
             $table->string('name');
             $table->string('address');
