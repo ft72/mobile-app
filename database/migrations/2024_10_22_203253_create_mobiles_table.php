@@ -10,14 +10,14 @@ class CreateMobilesTable extends Migration
     {
         Schema::create('mobiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('shop_id')->constrained()->onDelete('cascade');
+            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
             $table->string('brand');
             $table->string('model');
             $table->string('imei')->unique();
             $table->string('sku')->unique();
             $table->decimal('price', 10, 2);
             $table->enum('stock_status', ['in_stock', 'sold', 'reserved'])->default('in_stock');
-            $table->foreignId('order_id')->nullable()->constrained()->onDelete('set null'); // Sold reference
+            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('set null');
             $table->timestamps();
         });
     }
