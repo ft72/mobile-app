@@ -16,9 +16,27 @@ export default function MobileCreate(shops) {
         imei2: "",
         sku: "",
         price: "",
-        stock_status: "in_stock", // Defaulting to "in_stock"
-        order_id: "", // For linking to an order if the mobile is sold
+        stock_status: "in_stock",
     });
+
+    const mobileBrands = [
+        "Apple",
+        "Samsung",
+        "Huawei",
+        "Nokia",
+        "Sony",
+        "Xiaomi",
+        "Oppo",
+        "Vivo",
+        "OnePlus",
+        "Google",
+        "LG",
+        "Motorola",
+        "HTC",
+        "Realme",
+        "Asus",
+        "Lenovo",
+    ];
 
     const [isScanning, setIsScanning] = useState(false);
     const [scanningField, setScanningField] = useState(null);
@@ -141,15 +159,27 @@ export default function MobileCreate(shops) {
                                         <label className="block text-gray-700 font-bold mb-2">
                                             Brand
                                         </label>
-                                        <TextInput
-                                            type="text"
+                                        <select
                                             value={data.brand}
                                             onChange={(e) =>
                                                 setData("brand", e.target.value)
                                             }
                                             required
-                                            className="w-full p-2 border border-gray-300 rounded"
-                                        />
+                                            className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 w-full"
+                                        >
+                                            <option value="">
+                                                Select a Brand
+                                            </option>
+                                            {mobileBrands.map((brand) => (
+                                                <option
+                                                    key={brand}
+                                                    value={brand}
+                                                >
+                                                    {brand}
+                                                </option>
+                                            ))}
+                                            <option value="Other">Other</option>
+                                        </select>
                                         {errors.brand && (
                                             <div className="text-red-600">
                                                 {errors.brand}
@@ -318,16 +348,16 @@ export default function MobileCreate(shops) {
                                             </div>
                                         )}
                                     </div>
-
-                                    <button
-                                        type="submit"
-                                        disabled={processing}
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    >
-                                        {processing
-                                            ? "Adding..."
-                                            : "Add Mobile"}
-                                    </button>
+                                    <div className="flex justify-end mt-4">
+                                        <PrimaryButton
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? "Adding..."
+                                                : "Add Mobile"}
+                                        </PrimaryButton>
+                                    </div>
                                 </form>
                             )) || (
                                 <div className="flex justify-between">
@@ -359,12 +389,9 @@ export default function MobileCreate(shops) {
                             className="viewport"
                             style={{ width: "300px", height: "400px" }}
                         ></div>
-                        <button
-                            onClick={handleCloseScanner}
-                            className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-                        >
+                        <SecondaryButton onClick={handleCloseScanner}>
                             Close
-                        </button>
+                        </SecondaryButton>
                     </div>
                 </div>
             )}

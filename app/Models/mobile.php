@@ -26,8 +26,11 @@ class mobile extends Model
         return $this->belongsTo(Shop::class);
     }
 
-    public function order()
+    /**
+     * The orders that belong to the mobile.
+     */
+    public function orders()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsToMany(Order::class, 'order_mobile')->withTimestamps();
     }
 }

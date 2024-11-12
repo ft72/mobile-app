@@ -48,6 +48,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     Accessories
                                 </NavLink>
+                                <NavLink
+                                    href={route("customers")}
+                                    active={route().current("customers")}
+                                >
+                                    Customers
+                                </NavLink>
                                 {user.user_type == "admin" && (
                                     <NavLink
                                         href={route("admin.users")}
