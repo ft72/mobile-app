@@ -129,7 +129,7 @@ export default function Mobiles() {
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-gray-200">
-                                                {filteredMobiles.length > 0 ? (
+                                                { filteredMobiles > 1 && filteredMobiles.length > 0 ? (
                                                     filteredMobiles.map(
                                                         (mobile) => {
                                                             const shop =
