@@ -166,6 +166,38 @@ export default function AuthenticatedLayout({ header, children }) {
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("shops")}
+                            active={route().current("shops")}
+                        >
+                            Shops
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("mobiles")}
+                            active={route().current("mobiles")}
+                        >
+                            Mobiles
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("accessories")}
+                            active={route().current("accessories")}
+                        >
+                            Accessories
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("customers")}
+                            active={route().current("customers")}
+                        >
+                            Customers
+                        </ResponsiveNavLink>
+                        {user.user_type == "admin" && (
+                            <ResponsiveNavLink
+                                href={route("admin.users")}
+                                active={route().current("admin.users")}
+                            >
+                                Users
+                            </ResponsiveNavLink>
+                        )}
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
