@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\mobile;
 
 class shop extends Model
 {
@@ -27,7 +28,7 @@ class shop extends Model
 
     public function mobiles()
     {
-        return $this->hasMany(Mobile::class);
+        return $this->hasMany(mobile::class);
     }
 
     public function accessories()

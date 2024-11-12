@@ -48,15 +48,24 @@ class MobileController extends Controller
     public function index()
     {
         $shops = shop::where('user_id', auth()->user()->id)->get();
+        
+        if ($shops->isEmpty()) {
+            return Inertia::render('Mobile/Mobiles', [
+                'mobiles' => [],
+                'shops' => []
+            ]);
+        }
+
         foreach ($shops as $shop) {
             $mobiles[] = $shop->mobiles->groupBy('shop_id')->toArray();
         }
-        
-        \Log::info($mobiles);
-        
+
+
+
+
         return Inertia::render('Mobile/Mobiles', [
-            'mobiles' => $mobiles,
-            'shops' => $shops
+            'mobiles' => $mobiles ?: [],
+            'shops' => $shops ?: []
         ]);
     }
 }
